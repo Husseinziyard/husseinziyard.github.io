@@ -1104,6 +1104,16 @@ section h2::after {
     color: var(--highlight);
 }
 
+/* Ensure mobile browsers don't override phone number colors */
+a[href^="tel"].contact-link {
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+a[href^="tel"].contact-link:hover {
+    color: var(--highlight);
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -1496,12 +1506,14 @@ footer {
     .footer-section a {
         margin-bottom: 0.4rem;
         margin-right: 0;
-        display: block;
+        display: inline-block;
+        margin: 0 0.75rem 0.4rem;
     }
 
     .footer-bottom {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         gap: 1.5rem;
     }
 
