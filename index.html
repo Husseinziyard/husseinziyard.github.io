@@ -893,6 +893,16 @@
         </div>
     </section>
 
+    <!-- Basketball Game Section -->
+    <section id="game-section" style="text-align: center; padding: 4rem 2rem; background: var(--secondary); border-top: 1px solid var(--border);">
+        <h2 style="color: var(--highlight); margin-bottom: 0.5rem; font-size: 2rem;">Take a Break!</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">Shoot some hoops! Move your mouse (or drag) to aim, click/tap to shoot.</p>
+        <div style="margin: 0 auto; max-width: 600px; position: relative;">
+            <canvas id="basketballGame" width="600" height="400" style="background: var(--primary); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 600px; height: auto; cursor: crosshair; touch-action: none; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></canvas>
+            <div id="gameScore" style="position: absolute; top: 15px; left: 20px; font-size: 1.5rem; font-weight: 700; color: var(--highlight); font-family: 'Michroma', sans-serif;">Score: 0</div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -1286,6 +1296,147 @@
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 5000);
+        }
+
+        // Basketball Game Logic
+        const gameCanvas = document.getElementById('basketballGame');
+        if (gameCanvas) {
+            const ctx = gameCanvas.getContext('2d');
+            const scoreDisplay = document.getElementById('gameScore');
+
+            let score = 0;
+            let hoopX = 300;
+            let hoopDirection = 3;
+
+            const ball = {
+                x: 300,
+                y: 370,
+                radius: 15,
+                dy: 0,
+                isShooting: false,
+                color: '#ff8c00'
+            };
+
+            const hoop = {
+                y: 60,
+                width: 80,
+                height: 10
+            };
+
+            function drawBall() {
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fillStyle = ball.color;
+                ctx.fill();
+                ctx.closePath();
+                
+                ctx.beginPath();
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 2;
+                ctx.moveTo(ball.x - ball.radius, ball.y);
+                ctx.lineTo(ball.x + ball.radius, ball.y);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(ball.x, ball.y - ball.radius);
+                ctx.lineTo(ball.x, ball.y + ball.radius);
+                ctx.stroke();
+            }
+
+            function drawHoop() {
+                // Backboard
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(hoopX - 50, hoop.y - 40, 100, 60);
+                
+                // Inner square
+                ctx.strokeStyle = '#ff0000';
+                ctx.lineWidth = 3;
+                ctx.strokeRect(hoopX - 25, hoop.y - 15, 50, 35);
+                
+                // Rim
+                ctx.fillStyle = '#ff0000';
+                ctx.fillRect(hoopX - hoop.width / 2, hoop.y + 20, hoop.width, hoop.height);
+                
+                // Net
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(hoopX - hoop.width / 2, hoop.y + 20);
+                ctx.lineTo(hoopX - hoop.width / 2 + 10, hoop.y + 50);
+                ctx.lineTo(hoopX + hoop.width / 2 - 10, hoop.y + 50);
+                ctx.lineTo(hoopX + hoop.width / 2, hoop.y + 20);
+                ctx.stroke();
+            }
+
+            function updateGame() {
+                ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+                
+                hoopX += hoopDirection;
+                if (hoopX + 50 > gameCanvas.width || hoopX - 50 < 0) {
+                    hoopDirection *= -1;
+                }
+                
+                drawHoop();
+                drawBall();
+                
+                if (ball.isShooting) {
+                    ball.y += ball.dy;
+                    
+                    if (ball.y - ball.radius <= hoop.y + 20 + hoop.height && ball.y + ball.radius >= hoop.y + 20) {
+                        if (ball.x > hoopX - hoop.width / 2 + 5 && ball.x < hoopX + hoop.width / 2 - 5) {
+                            score++;
+                            scoreDisplay.textContent = 'Score: ' + score;
+                            resetBall();
+                            hoopDirection += hoopDirection > 0 ? 0.5 : -0.5;
+                        }
+                    }
+                    
+                    if (ball.y < -50) {
+                        resetBall();
+                    }
+                }
+                
+                requestAnimationFrame(updateGame);
+            }
+
+            function resetBall() {
+                ball.isShooting = false;
+                ball.y = gameCanvas.height - 30;
+                ball.dy = 0;
+            }
+
+            function setBallPos(e, isTouch = false) {
+                if (!ball.isShooting) {
+                    const rect = gameCanvas.getBoundingClientRect();
+                    const scaleX = gameCanvas.width / rect.width;
+                    const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+                    const x = (clientX - rect.left) * scaleX;
+                    ball.x = Math.max(ball.radius, Math.min(gameCanvas.width - ball.radius, x));
+                }
+            }
+
+            gameCanvas.addEventListener('mousemove', (e) => setBallPos(e));
+            gameCanvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                setBallPos(e, true);
+            }, {passive: false});
+
+            gameCanvas.addEventListener('click', () => {
+                if (!ball.isShooting) {
+                    ball.isShooting = true;
+                    ball.dy = -12;
+                }
+            });
+
+            gameCanvas.addEventListener('touchend', () => {
+                if (!ball.isShooting) {
+                    ball.isShooting = true;
+                    ball.dy = -12;
+                }
+            });
+
+            resetBall();
+            updateGame();
         }
 
     </script>
