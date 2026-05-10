@@ -1494,7 +1494,7 @@
                     
                     // Miss check: if ball stops moving or falls out of bounds
                     if (gameState === 'FLYING') {
-                        if ((Math.abs(ball.vx) < 0.1 && Math.abs(ball.vy) < 0.1 && ball.y > 370) || ball.x < -50 || ball.x > gameCanvas.width + 50) {
+                        if ((Math.abs(ball.vx) < 0.5 && Math.abs(ball.vy) <= gravity + 0.2 && ball.y >= 380 - ball.radius - 1) || ball.x < -50 || ball.x > gameCanvas.width + 50) {
                             gameState = 'MISSED';
                             setTimeout(resetBall, 1000);
                         }
