@@ -487,9 +487,7 @@
                     <i class="fab fa-github"></i>
                     <span>View Project</span>
                 </div>
-                <div class="project-image"><img
-                        src="assets/projects/ARM.png"
-                        alt="Consumer Patient Analytics"></div>
+                <div class="project-image"><img src="assets/projects/ARM.png" alt="Consumer Patient Analytics"></div>
                 <div class="project-content">
                     <h3>Consumer & Patient Analytics</h3>
                     <p class="project-desc">Association Rule Mining on UK retail dataset & Logistic Regression for
@@ -508,8 +506,7 @@
                     <i class="fab fa-github"></i>
                     <span>View Project</span>
                 </div>
-                <div class="project-image"><img
-                        src="assets/projects/Government Immigration Analytics.png"
+                <div class="project-image"><img src="assets/projects/Government Immigration Analytics.png"
                         alt="SQL Cloud Databases"></div>
                 <div class="project-content">
                     <h3>Advanced SQL & Cloud Databases</h3>
@@ -528,9 +525,7 @@
                     <i class="fab fa-github"></i>
                     <span>View Project</span>
                 </div>
-                <div class="project-image"><img
-                        src="assets/projects/EV1.webp"
-                        alt="EV Adoption Analysis"></div>
+                <div class="project-image"><img src="assets/projects/EV1.webp" alt="EV Adoption Analysis"></div>
                 <div class="project-content">
                     <h3>EV Adoption Impact Analysis</h3>
                     <p class="project-desc">Global analytical model studying environmental and economic impacts of
@@ -629,16 +624,22 @@
 
 
     <!-- Basketball Game Section -->
-    <section id="game-section" style="text-align: center; padding: 4rem 2rem; background: var(--secondary); border-top: 1px solid var(--border);">
+    <section id="game-section"
+        style="text-align: center; padding: 4rem 2rem; background: var(--secondary); border-top: 1px solid var(--border);">
         <h2 style="color: var(--highlight); margin-bottom: 1.5rem; font-size: 2rem;">Take a Break!</h2>
         <p style="color: var(--text-light); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;">
             Shoot some hoops!<br><br>
             Drag the ball back to aim, and release to shoot.
         </p>
         <div style="margin: 0 auto; max-width: 800px; position: relative;">
-            <canvas id="basketballGame" width="800" height="400" style="background: var(--primary); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 800px; height: auto; cursor: crosshair; touch-action: none; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></canvas>
-            <div id="gameScore" style="position: absolute; top: 15px; left: 20px; font-size: 1.5rem; font-weight: 700; color: var(--highlight); font-family: 'Michroma', sans-serif;">Score: 0</div>
-            <div id="gameInstruction" style="position: absolute; top: 15px; right: 20px; font-size: 1rem; color: var(--text-light); opacity: 0.7;">Drag & Release</div>
+            <canvas id="basketballGame" width="800" height="400"
+                style="background: var(--primary); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 800px; height: auto; cursor: crosshair; touch-action: none; display: block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></canvas>
+            <div id="gameScore"
+                style="position: absolute; top: 15px; left: 20px; font-size: 1.5rem; font-weight: 700; color: var(--highlight); font-family: 'Michroma', sans-serif;">
+                Score: 0</div>
+            <div id="gameInstruction"
+                style="position: absolute; top: 15px; right: 20px; font-size: 1rem; color: var(--text-light); opacity: 0.7;">
+                Drag & Release</div>
         </div>
     </section>
 
@@ -650,10 +651,11 @@
                 <h4>Research Paper Presenter – ADScAI 2026</h4>
                 <p><strong>Provider:</strong> University of Moratuwa</p>
                 <p><strong>Date:</strong> April 2026</p>
-                <p style="margin-top: 0.5rem;">Presented a research paper at the Applied Data Science & AI Conference 2026.</p>
+                <p style="margin-top: 0.5rem;">Presented a research paper at the Applied Data Science & AI Conference
+                    2026.</p>
             </div>
 
-        <div class="cert-card" data-certificate="assets/Certification/Workshop UOM.jpeg">
+            <div class="cert-card" data-certificate="assets/Certification/Workshop UOM.jpeg">
                 <h4>Workshop Participation – ADScAI 2026</h4>
                 <p><strong>Provider:</strong> University of Moratuwa</p>
                 <p><strong>Date:</strong> April 2026</p>
@@ -1312,7 +1314,7 @@
 
             let score = 0;
             let gameState = 'AIMING'; // AIMING, FLYING, SCORED, MISSED
-            
+
             const gravity = 0.5;
             const bounce = 0.6;
             const floorFriction = 0.8;
@@ -1333,7 +1335,7 @@
                 radius: 40,
                 backboardX: 650 + 40 + 5
             };
-            
+
             let isDragging = false;
             let dragX = 0;
             let dragY = 0;
@@ -1345,14 +1347,14 @@
                 ctx.fillStyle = '#ff8c00';
                 ctx.fill();
                 ctx.closePath();
-                
+
                 ctx.beginPath();
                 ctx.strokeStyle = '#333';
                 ctx.lineWidth = 1.5;
                 ctx.moveTo(x - ball.radius, y);
                 ctx.lineTo(x + ball.radius, y);
                 ctx.stroke();
-                
+
                 ctx.beginPath();
                 ctx.moveTo(x, y - ball.radius);
                 ctx.lineTo(x, y + ball.radius);
@@ -1360,14 +1362,15 @@
             }
 
             function drawHoopBack() {
+                const isLight = document.documentElement.classList.contains('light-theme');
                 // Pole
-                ctx.fillStyle = '#444';
+                ctx.fillStyle = isLight ? '#aaa' : '#444';
                 ctx.fillRect(hoop.backboardX, hoop.y - 40, 15, 300);
-                
+
                 // Backboard
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.fillStyle = isLight ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.9)';
                 ctx.fillRect(hoop.backboardX - 10, hoop.y - 70, 15, 100);
-                
+
                 // Back rim
                 ctx.beginPath();
                 ctx.ellipse(hoop.x, hoop.y, hoop.radius, 12, 0, Math.PI, Math.PI * 2);
@@ -1375,7 +1378,7 @@
                 ctx.lineWidth = 4;
                 ctx.stroke();
             }
-            
+
             function drawHoopFront() {
                 // Front rim
                 ctx.beginPath();
@@ -1383,40 +1386,42 @@
                 ctx.strokeStyle = '#ef4444';
                 ctx.lineWidth = 4;
                 ctx.stroke();
-                
+
                 // Net
+                const isLight = document.documentElement.classList.contains('light-theme');
                 ctx.beginPath();
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.strokeStyle = isLight ? 'rgba(0, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0.4)';
                 ctx.lineWidth = 2;
                 ctx.moveTo(hoop.x - hoop.radius, hoop.y);
                 ctx.lineTo(hoop.x - hoop.radius + 15, hoop.y + 60);
                 ctx.lineTo(hoop.x + hoop.radius - 15, hoop.y + 60);
                 ctx.lineTo(hoop.x + hoop.radius, hoop.y);
-                
+
                 // Net criss-cross
-                for(let i=1; i<4; i++) {
-                    ctx.moveTo(hoop.x - hoop.radius + (i*8), hoop.y);
-                    ctx.lineTo(hoop.x - hoop.radius + 15 + (i*5), hoop.y + 60);
-                    
-                    ctx.moveTo(hoop.x + hoop.radius - (i*8), hoop.y);
-                    ctx.lineTo(hoop.x + hoop.radius - 15 - (i*5), hoop.y + 60);
+                for (let i = 1; i < 4; i++) {
+                    ctx.moveTo(hoop.x - hoop.radius + (i * 8), hoop.y);
+                    ctx.lineTo(hoop.x - hoop.radius + 15 + (i * 5), hoop.y + 60);
+
+                    ctx.moveTo(hoop.x + hoop.radius - (i * 8), hoop.y);
+                    ctx.lineTo(hoop.x + hoop.radius - 15 - (i * 5), hoop.y + 60);
                 }
-                
+
                 ctx.stroke();
             }
 
             function drawTrajectory() {
                 if (isDragging && gameState === 'AIMING') {
+                    const isLight = document.documentElement.classList.contains('light-theme');
                     ctx.beginPath();
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                    ctx.strokeStyle = isLight ? 'rgba(0, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0.4)';
                     ctx.setLineDash([5, 5]);
                     ctx.lineWidth = 2;
-                    
+
                     let tx = ball.x;
                     let ty = ball.y;
                     let tvx = (ball.x - dragX) * 0.18;
                     let tvy = (ball.y - dragY) * 0.18;
-                    
+
                     ctx.moveTo(tx, ty);
                     for (let i = 0; i < 25; i++) {
                         tx += tvx;
@@ -1432,7 +1437,7 @@
             function checkRimCollision(rimX, rimY) {
                 let dx = ball.x - rimX;
                 let dy = ball.y - rimY;
-                let dist = Math.sqrt(dx*dx + dy*dy);
+                let dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < ball.radius + 4) {
                     let nx = dx / dist;
                     let ny = dy / dist;
@@ -1446,25 +1451,27 @@
 
             function updateGame() {
                 ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-                
+
+                const isLight = document.documentElement.classList.contains('light-theme');
+
                 // Draw floor
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+                ctx.fillStyle = isLight ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.05)';
                 ctx.fillRect(0, 380, gameCanvas.width, 20);
-                
+
                 drawHoopBack();
-                
+
                 if (gameState === 'FLYING' || gameState === 'SCORED' || gameState === 'MISSED') {
                     oldBallY = ball.y;
-                    
+
                     ball.vy += gravity;
                     ball.x += ball.vx;
                     ball.y += ball.vy;
-                    
+
                     // Left rim collision
                     checkRimCollision(hoop.x - hoop.radius, hoop.y);
                     // Right rim collision
                     checkRimCollision(hoop.x + hoop.radius, hoop.y);
-                    
+
                     // Backboard collision
                     if (ball.x + ball.radius > hoop.backboardX - 10 && ball.x - ball.radius < hoop.backboardX + 5) {
                         if (ball.y > hoop.y - 70 && ball.y < hoop.y + 30) {
@@ -1474,14 +1481,14 @@
                             }
                         }
                     }
-                    
+
                     // Floor collision
                     if (ball.y + ball.radius > 380) {
                         ball.y = 380 - ball.radius;
                         ball.vy *= -bounce;
                         ball.vx *= floorFriction;
                     }
-                    
+
                     // Score logic: ball goes down through the hoop
                     if (gameState === 'FLYING' && oldBallY < hoop.y && ball.y >= hoop.y && ball.vy > 0) {
                         if (ball.x > hoop.x - hoop.radius + 5 && ball.x < hoop.x + hoop.radius - 5) {
@@ -1491,7 +1498,7 @@
                             setTimeout(resetBall, 1500);
                         }
                     }
-                    
+
                     // Miss check: if ball stops moving or falls out of bounds
                     if (gameState === 'FLYING') {
                         if ((Math.abs(ball.vx) < 0.5 && Math.abs(ball.vy) <= gravity + 0.2 && ball.y >= 380 - ball.radius - 1) || ball.x < -50 || ball.x > gameCanvas.width + 50) {
@@ -1500,12 +1507,12 @@
                         }
                     }
                 }
-                
+
                 // Draw the ball behind the front rim if it's "inside" the basket area
                 drawBall(ball.x, ball.y);
                 drawHoopFront();
                 drawTrajectory();
-                
+
                 if (isDragging && gameState === 'AIMING') {
                     // Draw a subtle line from ball to pull point
                     ctx.beginPath();
@@ -1515,17 +1522,17 @@
                     ctx.lineWidth = 3;
                     ctx.stroke();
                 }
-                
+
                 if (gameState === 'SCORED') {
                     ctx.fillStyle = '#10b981';
                     ctx.font = 'bold 36px "Michroma", sans-serif';
-                    ctx.fillText('SWISH!', gameCanvas.width/2 - 70, 100);
+                    ctx.fillText('SWISH!', gameCanvas.width / 2 - 70, 100);
                 } else if (gameState === 'MISSED') {
                     ctx.fillStyle = '#ef4444';
                     ctx.font = 'bold 36px "Michroma", sans-serif';
-                    ctx.fillText('MISS!', gameCanvas.width/2 - 50, 100);
+                    ctx.fillText('MISS!', gameCanvas.width / 2 - 50, 100);
                 }
-                
+
                 requestAnimationFrame(updateGame);
             }
 
@@ -1552,11 +1559,11 @@
             function handleStart(e) {
                 if (gameState !== 'AIMING') return;
                 const pos = getMousePos(e);
-                
+
                 isDragging = true;
                 dragX = pos.x;
                 dragY = pos.y;
-                
+
                 if (e.touches) e.preventDefault();
             }
 
@@ -1571,13 +1578,13 @@
             function handleEnd(e) {
                 if (!isDragging) return;
                 isDragging = false;
-                
+
                 let dx = ball.x - dragX;
                 let dy = ball.y - dragY;
-                
+
                 ball.vx = dx * 0.18;
                 ball.vy = dy * 0.18;
-                
+
                 if (Math.abs(ball.vx) > 1 || Math.abs(ball.vy) > 1) {
                     gameState = 'FLYING';
                 }
@@ -1586,9 +1593,9 @@
             gameCanvas.addEventListener('mousedown', handleStart);
             gameCanvas.addEventListener('mousemove', handleMove);
             window.addEventListener('mouseup', handleEnd);
-            
-            gameCanvas.addEventListener('touchstart', handleStart, {passive: false});
-            gameCanvas.addEventListener('touchmove', handleMove, {passive: false});
+
+            gameCanvas.addEventListener('touchstart', handleStart, { passive: false });
+            gameCanvas.addEventListener('touchmove', handleMove, { passive: false });
             window.addEventListener('touchend', handleEnd);
 
             resetBall();
