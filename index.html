@@ -1440,8 +1440,9 @@
 
                     let tx = ball.x;
                     let ty = ball.y;
-                    let tvx = (ball.x - dragX) * 0.18;
-                    let tvy = (ball.y - dragY) * 0.18;
+                    let pm = window.innerWidth <= 768 ? 0.32 : 0.18;
+                    let tvx = (ball.x - dragX) * pm;
+                    let tvy = (ball.y - dragY) * pm;
 
                     ctx.moveTo(tx, ty);
                     for (let i = 0; i < 25; i++) {
@@ -1603,8 +1604,9 @@
                 let dx = ball.x - dragX;
                 let dy = ball.y - dragY;
 
-                ball.vx = dx * 0.18;
-                ball.vy = dy * 0.18;
+                let pm = window.innerWidth <= 768 ? 0.32 : 0.18;
+                ball.vx = dx * pm;
+                ball.vy = dy * pm;
 
                 if (Math.abs(ball.vx) > 1 || Math.abs(ball.vy) > 1) {
                     gameState = 'FLYING';
