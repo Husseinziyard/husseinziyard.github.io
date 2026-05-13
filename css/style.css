@@ -1968,3 +1968,28 @@ html.light-theme .notification {
     border-color: var(--border);
     color: var(--text);
 }
+
+/* Basketball Game Mobile Adjustments */
+@media (max-width: 768px) {
+    #gameScore {
+        font-size: 1.1rem !important;
+        top: 10px !important;
+        left: 10px !important;
+    }
+    
+    #gameInstruction {
+        font-size: 0.85rem !important;
+        top: 10px !important;
+        right: 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #gameScore {
+        font-size: 0.9rem !important;
+    }
+    
+    #gameInstruction {
+        font-size: 0.75rem !important;
+    }
+}
