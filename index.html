@@ -1358,6 +1358,7 @@
             };
 
             let isDragging = false;
+            let isTouchInteraction = false;
             let dragX = 0;
             let dragY = 0;
             let oldBallY = 0;
@@ -1440,7 +1441,7 @@
 
                     let tx = ball.x;
                     let ty = ball.y;
-                    let pm = window.innerWidth <= 768 ? 0.32 : 0.18;
+                    let pm = isTouchInteraction ? 0.32 : 0.18;
                     let tvx = (ball.x - dragX) * pm;
                     let tvy = (ball.y - dragY) * pm;
 
@@ -1583,6 +1584,7 @@
                 const pos = getMousePos(e);
 
                 isDragging = true;
+                isTouchInteraction = !!e.touches;
                 dragX = pos.x;
                 dragY = pos.y;
 
@@ -1604,7 +1606,7 @@
                 let dx = ball.x - dragX;
                 let dy = ball.y - dragY;
 
-                let pm = window.innerWidth <= 768 ? 0.32 : 0.18;
+                let pm = isTouchInteraction ? 0.32 : 0.18;
                 ball.vx = dx * pm;
                 ball.vy = dy * pm;
 
