@@ -305,7 +305,15 @@
             <h1>Hussein Ziyard</h1>
             <p>Data Science & AI Specialist | Machine Learning Engineer | Sports Analytics Enthusiast</p>
             <div class="hero-buttons">
-                <a href="assets/Hussein Ziyard CV.pdf" download class="btn btn-primary">Download CV</a>
+                <div class="cv-dropdown">
+                    <button class="btn btn-primary cv-dropdown-toggle" id="downloadCvBtn" aria-haspopup="true" aria-expanded="false">
+                        Download CV <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="cv-dropdown-menu" id="cvDropdownMenu" aria-labelledby="downloadCvBtn">
+                        <a href="assets/Hussein Ziyard CV.pdf" target="_blank" class="cv-dropdown-item">ATS-Friendly CV</a>
+                        <a href="assets/Hussein_CV.pdf" target="_blank" class="cv-dropdown-item">CV</a>
+                    </div>
+                </div>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             </div>
         </div>
@@ -1087,6 +1095,50 @@
 
         // Initial call
         highlightActiveSection();
+
+        // CV Dropdown Logic
+        const downloadCvBtn = document.getElementById('downloadCvBtn');
+        const cvDropdownMenu = document.getElementById('cvDropdownMenu');
+
+        if (downloadCvBtn && cvDropdownMenu) {
+            downloadCvBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                this.classList.toggle('active');
+                cvDropdownMenu.classList.toggle('show');
+                
+                // Toggle chevron icon up / down
+                const icon = this.querySelector('i');
+                if (icon) {
+                    if (this.classList.contains('active')) {
+                        icon.className = 'fas fa-chevron-up';
+                    } else {
+                        icon.className = 'fas fa-chevron-down';
+                    }
+                }
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.cv-dropdown')) {
+                    downloadCvBtn.classList.remove('active');
+                    cvDropdownMenu.classList.remove('show');
+                    downloadCvBtn.setAttribute('aria-expanded', 'false');
+                    const icon = downloadCvBtn.querySelector('i');
+                    if (icon) icon.className = 'fas fa-chevron-down';
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    downloadCvBtn.classList.remove('active');
+                    cvDropdownMenu.classList.remove('show');
+                    downloadCvBtn.setAttribute('aria-expanded', 'false');
+                    const icon = downloadCvBtn.querySelector('i');
+                    if (icon) icon.className = 'fas fa-chevron-down';
+                }
+            });
+        }
 
         // Certificate Modal Logic
         const certModal = document.getElementById('certModal');
