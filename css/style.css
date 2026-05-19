@@ -2006,24 +2006,6 @@ html.light-theme .notification {
     }
 }
 
-.cv-dropdown-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-family: inherit;
-    border: none;
-    outline: none;
-}
-
-.cv-dropdown-toggle i {
-    transition: transform 0.3s ease;
-}
-
-.cv-dropdown-toggle.active i {
-    transform: rotate(180deg);
-}
-
 .cv-dropdown-menu {
     position: absolute;
     top: calc(100% + 8px);
@@ -2062,9 +2044,7 @@ html.light-theme .notification {
 }
 
 .cv-dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: block;
     padding: 0.75rem 1.5rem;
     color: var(--text-light);
     text-decoration: none;
@@ -2073,13 +2053,6 @@ html.light-theme .notification {
     transition: all 0.2s ease;
     text-align: left;
     white-space: nowrap;
-}
-
-.cv-dropdown-item i {
-    color: var(--highlight);
-    font-size: 1.1rem;
-    width: 16px;
-    text-align: center;
 }
 
 .cv-dropdown-item:hover {
